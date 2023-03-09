@@ -1,14 +1,17 @@
 #include "./network.h"
 
-void server_run() {
+void server_run(int argc, char *argv[]) {
+    if (argc != 3) printf("error: wrong adress");
     char buffer[4096];
 
     int server_socket = socket(AF_INET,SOCK_STREAM, 0);
 
     struct sockaddr_in address;
     address.sin_family = AF_INET;
-    address.sin_port = htons(8001); // port number 8001
-    address.sin_addr.s_addr = htonl(INADDR_LOOPBACK); // address 127.0.0.1;
+    unsigned short port;
+    sscanf(argv[1], "%hu", &port);
+    address.sin_port = htons(port);
+    inet_aton(argv[2], &address.sin_addr);
 
     bind(server_socket, (struct sockaddr *) &address, sizeof(address));
     
@@ -20,19 +23,18 @@ void server_run() {
     int clientSocket;
     while(1) {
         clientSocket = accept(server_socket, NULL, NULL);
-        read_file(buffer);
+        read_file(buffer, argv[3]);
         send(clientSocket, buffer, strlen(buffer), 0);
         close(clientSocket);
     }
 }
 
-void read_file(char buffer[])
-{
+void read_file(char buffer[], char path[]) {
     char header[64] = "HTTP/1.1 200 OK\r\n\n";
     memset(buffer, '\0', strlen(buffer));
     strcat(buffer, header);
 
-    FILE *fp = fopen("index.html", "r");
+    FILE *fp = fopen(path, "r");
 
     char line[128];
     while (fgets(line, 128, fp) != 0) {
