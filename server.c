@@ -1,8 +1,10 @@
 #include "./network.h"
-#include "./arg_parse.h"
+#include <stdio.h>
 
 int main(int argc, char *argv[]) {
-    parse_args(argc, argv);
+    for (int i = 1; i < argc; i++) {
+        printf("%s \n", argv[i]);
+    }
     server_run();
     return 0;
 }

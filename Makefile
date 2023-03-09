@@ -7,7 +7,7 @@ network.a:
 	ar rcs network.a network.o
 
 server: network.a
-	gcc $(FLAGS) server.c arg_parse.c network.a -o server.out
+	gcc $(FLAGS) server.c network.a -o server.out
 
 .PHONY: all clean rebuild
 
