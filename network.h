@@ -1,3 +1,6 @@
+#ifndef NETWORK_H
+#define NETWORK_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,3 +13,5 @@
 
 void server_run();
 void read_file(char buffer[]);
+
+#endif // NETWORK_H
