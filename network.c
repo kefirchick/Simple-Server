@@ -30,10 +30,7 @@ int server_run(char *argv[]) {
     int clientSocket;
     while(1) {
         clientSocket = accept(server_socket, NULL, NULL);
-        // if (read_file(buffer, argv[3]) == 1) {
-        //     printf("Error: wrong file name");
-        //     return 1;
-        // }
+        read_file(buffer, argv[3]);
         send(clientSocket, buffer, strlen(buffer), 0);
         close(clientSocket);
     }
