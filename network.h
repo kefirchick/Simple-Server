@@ -11,7 +11,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-void server_run(int argc, char *argv[]);
-void read_file(char buffer[], char path[]);
+int server_run( char *argv[]);
+int read_file(char buffer[], char path[]);
+int file_name_check(char path[]);
 
 #endif // NETWORK_H
