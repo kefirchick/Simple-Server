@@ -11,7 +11,11 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 
-int server_run( char *argv[]);
+#define BUFF_SIZE 4096
+#define LINE_LEN 128
+#define BACKLOG 8
+
+int server_run(char *argv[]);
 int read_file(char buffer[], char path[]);
 int file_name_check(char path[]);
 

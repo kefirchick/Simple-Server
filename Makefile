@@ -1,13 +1,16 @@
-FLAGS = -Wall -Werror -Wextra
+CFLAGS =-c -Wall -Werror -Wextra
 
 all: server
 
 network.a:
-	gcc -c $(FLAGS) network.c
+	gcc $(CFLAGS) network.c
 	ar rcs network.a network.o
 
 server: network.a
-	gcc $(FLAGS) server.c network.a -o server.out
+	gcc server.c network.a -o server.out
+
+run: server
+	./server.out 8001 127.0.0.1 index.html
 
 .PHONY: all clean rebuild
 
